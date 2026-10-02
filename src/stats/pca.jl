@@ -96,7 +96,7 @@ function _fit!(o::CCIPCA, x::AbstractVector{<:Real})
     #o.center = (o.n * o.center .+ x)/n
     o.center += (x .- o.center) ./ n
     # center the new observation, unless this is the first observation:
-    o.xi = (o.n > 0) ? (x .- o.center) : deepcopy(x)
+    o.xi = (o.n > 0) ? (x .- o.center) : copy(x)
     # Now recalc eigen-values and -vectors given the new observation:
     f = (1.0+o.l)/n
     @inbounds for i in 1:outdim(o)
